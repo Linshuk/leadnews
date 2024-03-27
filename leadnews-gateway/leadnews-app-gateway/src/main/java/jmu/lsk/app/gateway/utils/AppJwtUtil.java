@@ -1,4 +1,5 @@
-package jmu.lsk.utils.common;
+package jmu.lsk.app.gateway.utils;
+
 
 import io.jsonwebtoken.*;
 
@@ -109,8 +110,8 @@ public class AppJwtUtil {
     public static void main(String[] args) {
        /* Map map = new HashMap();
         map.put("id","11");*/
-        System.out.println(AppJwtUtil.getToken(1102L));
-        Jws<Claims> jws = AppJwtUtil.getJws("eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAADWLywrDIBAA_2XPEbK65vU36iqYtCCsgYTSf-_m0NsMw3xg7xU2iAm5FG-NtzQaio5M4BlNKrw4RlpTJhighg4bzoie3OjtAHJGveWWnt9PF1F9yaEcTlYOrSnnq_2_aXq-qs19f9oMtml-AAAA.0ee86n0mCiQQCTLElNKPMbqDT5-ym-lR4PtNXJb503VnS-p2oTpFmwXAjfHM1aQLXIuvaCaNSbw4ZKjQeHovTQ");
+        System.out.println(AppJwtUtil.getToken(1232L));
+        Jws<Claims> jws = AppJwtUtil.getJws("eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAC2L0QqDMAxF_yXPFkxsU-ffpLOFug0KqbAh_vsieJ_O5XAO2HqFBZiIZikPR3PKzo9FnDwTucxi8yUxTzBAlQ4LRsQQYmAcQPdktf6058_lVe2-9WUs-2osrRnnb7s7Rry6ag5p8ucf8btrQ4EAAAA.In8-mXuIFdyhmurqXbfrQ7qeX7vKejqvTHAvUBMNF4vgA8EjrwHHVmxu79hAiHfB-ggMDUEF2s9tbcCHfHoyVQ");
         Claims claims = jws.getBody();
         System.out.println(claims.get("id"));
 

@@ -2,7 +2,7 @@ package jmu.lsk.app.gateway.filter;
 
 import com.alibaba.nacos.api.utils.StringUtils;
 import io.jsonwebtoken.Claims;
-import jmu.lsk.utils.common.AppJwtUtil;
+import jmu.lsk.app.gateway.utils.AppJwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
