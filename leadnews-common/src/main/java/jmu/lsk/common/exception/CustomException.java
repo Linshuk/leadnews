@@ -1,7 +1,7 @@
-package com.heima.common.exception;
+package jmu.lsk.common.exception;
 
 
-import com.heima.model.common.enums.AppHttpCodeEnum;
+import jmu.lsk.model.common.enums.AppHttpCodeEnum;
 
 public class CustomException extends RuntimeException {
 

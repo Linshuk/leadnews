@@ -1,10 +1,11 @@
-package com.heima.utils.common;
+package jmu.lsk.utils.common;
 
-import com.hankcs.hanlp.seg.common.Term;
-import com.hankcs.hanlp.tokenizer.StandardTokenizer;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
+import com.hankcs.hanlp.seg.common.Term;
+import com.hankcs.hanlp.tokenizer.StandardTokenizer;
+
 
 import java.math.BigInteger;
 import java.util.HashMap;

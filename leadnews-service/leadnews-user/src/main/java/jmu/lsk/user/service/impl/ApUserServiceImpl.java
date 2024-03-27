@@ -1,15 +1,16 @@
-package com.heima.user.service.impl;
+package jmu.lsk.user.service.impl;
 
  
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.heima.model.common.dtos.ResponseResult;
-import com.heima.model.common.enums.AppHttpCodeEnum;
-import com.heima.model.common.user.dtos.LoginDto;
-import com.heima.model.common.user.pojos.ApUser;
-import com.heima.user.mapper.ApUserMapper;
-import com.heima.user.service.ApUserService;
-import com.heima.utils.common.AppJwtUtil;
+import jmu.lsk.model.common.dtos.ResponseResult;
+import jmu.lsk.model.common.enums.AppHttpCodeEnum;
+import jmu.lsk.model.common.user.dtos.LoginDto;
+import jmu.lsk.model.common.user.pojos.ApUser;
+import jmu.lsk.user.mapper.ApUserMapper;
+import jmu.lsk.user.service.ApUserService;
+import jmu.lsk.utils.common.AppJwtUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
@@ -23,7 +24,6 @@ public class ApUserServiceImpl extends ServiceImpl<ApUserMapper, ApUser> impleme
 
     @Override
     public ResponseResult login(LoginDto dto) {
-
             //1.正常登录（手机号+密码登录）
             if (!StringUtils.isBlank(dto.getPhone()) && !StringUtils.isBlank(dto.getPassword())) {
                 //1.1查询用户

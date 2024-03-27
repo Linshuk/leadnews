@@ -1,8 +1,9 @@
-package com.heima.utils.common;
+package jmu.lsk.utils.common;
 
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
-
+//import sun.misc.BASE64Decoder;
+//import sun.misc.BASE64Encoder;
+import org.apache.commons.codec.binary.Base64;
+//import java.util.Base64;
 public class Base64Utils {
 
     /**
@@ -11,10 +12,13 @@ public class Base64Utils {
      * @return
      */
     public static byte[] decode(String base64){
-        BASE64Decoder decoder = new BASE64Decoder();
+//        Base64.Decoder decoder = Base64.getDecoder();
+//        BASE64Decoder decoder = new BASE64Decoder();
         try {
             // Base64解码
-            byte[] b = decoder.decodeBuffer(base64);
+//            byte[] b = decoder.decode(base64);
+//            byte[] b = decoder.decodeBuffer(base64);
+            byte[] b =Base64.decodeBase64(base64);
             for (int i = 0; i < b.length; ++i) {
                 if (b[i] < 0) {// 调整异常数据
                     b[i] += 256;
@@ -34,7 +38,9 @@ public class Base64Utils {
      * @throws Exception
      */
     public static String encode(byte[] data) {
-        BASE64Encoder encoder = new BASE64Encoder();
-        return encoder.encode(data);
+        return Base64.encodeBase64String(data);
+//        Base64.Encoder encoder = Base64.getEncoder();
+//        BASE64Encoder encoder = new BASE64Encoder();
+//        return encoder.encodeToString(data);
     }
 }

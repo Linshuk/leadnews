@@ -12,3 +12,13 @@ server:
       charset: utf-8
       enabled: true
 
+springdoc:
+  # 可以用','分割多个需要扫描的包
+  packages-to-scan: jmu.lsk.user.controller.v1
+  # 可以用','分割多个需要匹配的路径
+  # 还可用/hello/**匹配/hello路径及其子路径
+  paths-to-match: /api/v1/login/**
+
+
+
+

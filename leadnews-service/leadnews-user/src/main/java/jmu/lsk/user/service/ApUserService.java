@@ -1,11 +1,11 @@
  
-package com.heima.user.service;
+package jmu.lsk.user.service;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.heima.model.common.dtos.ResponseResult;
-import com.heima.model.common.user.dtos.LoginDto;
-import com.heima.model.common.user.pojos.ApUser;
+import jmu.lsk.model.common.dtos.ResponseResult;
+import jmu.lsk.model.common.user.dtos.LoginDto;
+import jmu.lsk.model.common.user.pojos.ApUser;
 
 public interface ApUserService extends IService<ApUser> {
  

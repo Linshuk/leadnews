@@ -1,8 +1,8 @@
-package com.heima.common.exception;
+package jmu.lsk.common.exception;
 
 
-import com.heima.model.common.dtos.ResponseResult;
-import com.heima.model.common.enums.AppHttpCodeEnum;
+import jmu.lsk.model.common.dtos.ResponseResult;
+import jmu.lsk.model.common.enums.AppHttpCodeEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

@@ -1,4 +1,4 @@
-package com.heima.model.common.dtos;
+package jmu.lsk.model.common.dtos;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;

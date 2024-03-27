@@ -1,4 +1,4 @@
-package com.heima.utils.common;
+package jmu.lsk.utils.common;
 
 
 import javax.crypto.Cipher;

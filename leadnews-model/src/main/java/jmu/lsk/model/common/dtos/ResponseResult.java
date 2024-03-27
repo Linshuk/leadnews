@@ -1,13 +1,11 @@
-package com.heima.model.common.dtos;
+package jmu.lsk.model.common.dtos;
 
 import com.alibaba.fastjson.JSON;
-import com.heima.model.common.enums.AppHttpCodeEnum;
+import jmu.lsk.model.common.enums.AppHttpCodeEnum;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 通用的结果返回类

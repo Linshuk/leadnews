@@ -1,4 +1,4 @@
-package com.heima.utils.common;
+package jmu.lsk.utils.common;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;

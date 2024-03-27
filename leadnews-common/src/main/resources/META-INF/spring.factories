@@ -1,2 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  jmu.lsk.common.exception.ExceptionCatch
+  jmu.lsk.common.exception.ExceptionCatch,\
+  jmu.lsk.common.springdoc.SpringdocConfig

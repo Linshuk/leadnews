@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>jmu.lsk</groupId>
-        <artifactId>leadnews-service</artifactId>
+        <artifactId>leadnews-gateway</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>leadnews-user</artifactId>
+    <artifactId>leadnews-app-gateway</artifactId>
 
     <properties>
         <maven.compiler.source>18</maven.compiler.source>

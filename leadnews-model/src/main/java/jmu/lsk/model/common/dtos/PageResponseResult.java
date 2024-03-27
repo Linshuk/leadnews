@@ -1,4 +1,4 @@
-package com.heima.model.common.dtos;
+package jmu.lsk.model.common.dtos;
 
 import java.io.Serializable;
 
