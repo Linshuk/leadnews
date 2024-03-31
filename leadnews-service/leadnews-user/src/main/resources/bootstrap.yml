@@ -11,7 +11,7 @@ spring:
         register-enabled: true
         username: nacos
         password: nacos
-        namespace: ce6cf512-2d00-4b51-9f02-6202ba727c69
+        namespace: public
         group: DEFAULT_GROUP
         ephemeral: true
         weight: 100

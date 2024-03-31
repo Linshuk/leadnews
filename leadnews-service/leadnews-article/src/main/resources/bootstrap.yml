@@ -1,8 +1,8 @@
 server:
-  port: 51601
+  port: 51802
 spring:
   application:
-    name: leadnews-app-gateway
+    name: leadnews-article
   cloud:
     nacos:
       discovery:
@@ -23,5 +23,3 @@ spring:
         file-extension: yaml
         group: DEFAULT_GROUP
         context-path: /nacos
-
-
