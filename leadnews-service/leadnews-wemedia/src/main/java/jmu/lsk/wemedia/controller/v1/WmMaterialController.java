@@ -1,10 +1,12 @@
 package jmu.lsk.wemedia.controller.v1;
 
 import jmu.lsk.model.common.dtos.ResponseResult;
+import jmu.lsk.model.common.wemedia.dtos.WmMaterialDto;
 import jmu.lsk.wemedia.service.WmMaterialService;
 import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,6 +21,12 @@ public class WmMaterialController {
     @PostMapping("/upload_picture")
     public ResponseResult uploadPicture(MultipartFile multipartFile){
         return wmMaterialService.uploadPicture(multipartFile);
+    }
+
+
+    @PostMapping("/list")
+    public ResponseResult findList(@RequestBody WmMaterialDto dto){
+        return wmMaterialService.findList(dto);
     }
  
 }
