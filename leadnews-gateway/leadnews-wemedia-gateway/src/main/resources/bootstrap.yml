@@ -1,8 +1,8 @@
 server:
-  port: 51803
+  port: 51602
 spring:
   application:
-    name: leadnews-wemedia
+    name: leadnews-wemedia-gateway
   cloud:
     nacos:
       discovery:
@@ -23,3 +23,5 @@ spring:
         file-extension: yaml
         group: DEFAULT_GROUP
         context-path: /nacos
+
+

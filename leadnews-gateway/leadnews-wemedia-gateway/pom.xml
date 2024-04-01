@@ -5,24 +5,16 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>jmu.lsk</groupId>
-        <artifactId>leadnews-service</artifactId>
+        <artifactId>leadnews-gateway</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>leadnews-wemedia</artifactId>
+    <artifactId>leadnews-wemedia-gateway</artifactId>
 
     <properties>
         <maven.compiler.source>18</maven.compiler.source>
         <maven.compiler.target>18</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>jmu.lsk</groupId>
-            <artifactId>file-starter</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
 
 </project>

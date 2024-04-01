@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>leadnews-app-gateway</module>
+        <module>leadnews-wemedia-gateway</module>
     </modules>
 
     <dependencies>
