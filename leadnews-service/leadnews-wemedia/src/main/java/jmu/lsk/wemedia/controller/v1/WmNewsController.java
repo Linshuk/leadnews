@@ -1,5 +1,6 @@
 package jmu.lsk.wemedia.controller.v1;
 import jmu.lsk.model.common.dtos.ResponseResult;
+import jmu.lsk.model.common.wemedia.dtos.WmNewsDto;
 import jmu.lsk.model.common.wemedia.dtos.WmNewsPageReqDto;
 import jmu.lsk.wemedia.service.WmNewsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,5 +21,9 @@ public class WmNewsController {
     public ResponseResult findAll(@RequestBody WmNewsPageReqDto dto){
         return  wmNewsService.findAll(dto);
     }
- 
+
+    @PostMapping("/submit")
+    public ResponseResult submitNews(@RequestBody WmNewsDto dto){
+        return wmNewsService.submitNews(dto);
+    }
 }
