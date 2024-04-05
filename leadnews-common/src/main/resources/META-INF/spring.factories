@@ -1,3 +1,5 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   jmu.lsk.common.exception.ExceptionCatch,\
-  jmu.lsk.common.springdoc.SpringdocConfig
+  jmu.lsk.common.springdoc.SpringdocConfig,\
+  jmu.lsk.common.aliyun.GreenImageScan,\
+  jmu.lsk.common.aliyun.GreenTextScan
