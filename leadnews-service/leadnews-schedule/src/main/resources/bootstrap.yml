@@ -1,0 +1,25 @@
+server:
+  port: 51804
+spring:
+  application:
+    name: leadnews-schedule
+  cloud:
+    nacos:
+      discovery:
+        enabled: true
+        server-addr: 192.168.200.130:8848
+        register-enabled: true
+        username: nacos
+        password: nacos
+        namespace: public
+        group: DEFAULT_GROUP
+        ephemeral: true
+        weight: 100
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        username: ${spring.cloud.nacos.discovery.username}
+        password: ${spring.cloud.nacos.discovery.password}
+        namespace: ${spring.cloud.nacos.discovery.namespace}
+        file-extension: yaml
+        group: DEFAULT_GROUP
+        context-path: /nacos

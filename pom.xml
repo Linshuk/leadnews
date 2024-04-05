@@ -28,6 +28,7 @@
         <module>leadnews-service/leadnews-article</module>
         <module>leadnews-basic</module>
         <module>leadnews-service/leadnews-wemedia</module>
+        <module>leadnews-service/leadnews-schedule</module>
     </modules>
     <properties>
         <java.version>17</java.version>
@@ -51,6 +52,16 @@
         <activation.version>1.1.1</activation.version>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
 <!--        <dependency>-->
 <!--            <groupId>org.springframework.boot</groupId>-->
 <!--            <artifactId>spring-boot-starter-security</artifactId>-->

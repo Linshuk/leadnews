@@ -37,6 +37,7 @@ public class ArticleHomeController {
     @PostMapping("/loadnew")
     @Operation(summary = "最新文章")
     public ResponseResult loadNew(@RequestBody ArticleHomeDto dto) {
+        System.out.println("sdsdsd");
         return apArticleService.load(ArticleConstants.LOADTYPE_LOAD_NEW,dto);
     }
 }

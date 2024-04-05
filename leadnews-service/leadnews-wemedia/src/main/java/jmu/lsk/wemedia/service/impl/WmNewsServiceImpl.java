@@ -5,26 +5,34 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import jmu.lsk.apis.article.IScheduleClient;
 import jmu.lsk.common.constants.WemediaConstants;
 import jmu.lsk.common.exception.CustomException;
 import jmu.lsk.model.common.dtos.PageResponseResult;
 import jmu.lsk.model.common.dtos.ResponseResult;
 import jmu.lsk.model.common.enums.AppHttpCodeEnum;
+import jmu.lsk.model.common.enums.TaskTypeEnum;
+import jmu.lsk.model.common.schedule.dtos.Task;
 import jmu.lsk.model.common.wemedia.dtos.WmNewsDto;
 import jmu.lsk.model.common.wemedia.dtos.WmNewsPageReqDto;
 import jmu.lsk.model.common.wemedia.pojos.WmMaterial;
 import jmu.lsk.model.common.wemedia.pojos.WmNews;
 import jmu.lsk.model.common.wemedia.pojos.WmNewsMaterial;
 import jmu.lsk.model.common.wemedia.pojos.WmUser;
+import jmu.lsk.utils.common.ProtostuffUtil;
 import jmu.lsk.utils.thread.WmThreadLocalUtil;
 import jmu.lsk.wemedia.mapper.WmMaterialMapper;
 import jmu.lsk.wemedia.mapper.WmNewsMapper;
 import jmu.lsk.wemedia.mapper.WmNewsMaterialMapper;
+import jmu.lsk.wemedia.service.WmNewsAutoScanService;
 import jmu.lsk.wemedia.service.WmNewsService;
+import jmu.lsk.wemedia.service.WmNewsTaskService;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -102,8 +110,14 @@ public class WmNewsServiceImpl  extends ServiceImpl<WmNewsMapper, WmNews> implem
      * @param dto
      * @return
      */
+    @Autowired
+    private WmNewsAutoScanService wmNewsAutoScanService;
+
+    @Autowired
+    private WmNewsTaskService wmNewsTaskService;
+
     @Override
-    public ResponseResult submitNews(WmNewsDto dto) {
+    public ResponseResult submitNews(WmNewsDto dto){
 
         //0.条件判断
         if(dto == null || dto.getContent() == null){
@@ -140,6 +154,10 @@ public class WmNewsServiceImpl  extends ServiceImpl<WmNewsMapper, WmNews> implem
 
         //4.不是草稿，保存文章封面图片与素材的关系，如果当前布局是自动，需要匹配封面图片
         saveRelativeInfoForCover(dto,wmNews,materials);
+
+        //审核文章
+//        wmNewsAutoScanService.autoScanWmNews(wmNews.getId());
+        wmNewsTaskService.addNewsToTask(wmNews.getId(),wmNews.getPublishTime());
 
         return ResponseResult.okResult(AppHttpCodeEnum.SUCCESS);
 
@@ -273,6 +291,31 @@ public class WmNewsServiceImpl  extends ServiceImpl<WmNewsMapper, WmNews> implem
             wmNewsMaterialMapper.delete(Wrappers.<WmNewsMaterial>lambdaQuery().eq(WmNewsMaterial::getNewsId,wmNews.getId()));
             updateById(wmNews);
         }
-
     }
+
+    @Autowired
+    private   IScheduleClient scheduleClient;
+
+    /**
+     * 消费延迟队列数据
+     */
+    @Scheduled(fixedRate = 1000)
+    @Override
+    @SneakyThrows
+    public void scanNewsByTask() {
+
+        log.info("文章审核---消费任务执行---begin---");
+
+        ResponseResult responseResult = scheduleClient.poll(TaskTypeEnum.NEWS_SCAN_TIME.getTaskType(), TaskTypeEnum.NEWS_SCAN_TIME.getPriority());
+        if(responseResult.getCode().equals(200) && responseResult.getData() != null){
+            String json_str = JSON.toJSONString(responseResult.getData());
+            Task task = JSON.parseObject(json_str, Task.class);
+            byte[] parameters = task.getParameters();
+            WmNews wmNews = ProtostuffUtil.deserialize(parameters, WmNews.class);
+            System.out.println(wmNews.getId()+"-----------");
+            wmNewsAutoScanService.autoScanWmNews(wmNews.getId());
+        }
+        log.info("文章审核---消费任务执行---end---");
+    }
+
 }

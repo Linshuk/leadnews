@@ -23,4 +23,9 @@ public interface WmNewsService extends IService<WmNews> {
      * @return
      */
     public ResponseResult submitNews(WmNewsDto dto);
+
+    /**
+     * 消费延迟队列数据
+     */
+    public void scanNewsByTask();
 }

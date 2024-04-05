@@ -15,10 +15,18 @@ import java.io.Serializable;
  *
  * @author itheima
  */
- 
+
 @Data
 @TableName("ap_article_config")
 public class ApArticleConfig implements Serializable {
+
+    public ApArticleConfig(Long articleId){
+        this.articleId = articleId;
+        this.isComment = true;
+        this.isForward = true;
+        this.isDelete = false;
+        this.isDown = false;
+    }
  
     @TableId(value = "id",type = IdType.ASSIGN_ID)
     private Long id;
