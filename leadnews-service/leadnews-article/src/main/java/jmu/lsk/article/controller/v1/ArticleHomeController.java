@@ -30,14 +30,13 @@ public class ArticleHomeController {
 
     @PostMapping("/loadmore")
     @Operation(summary = "更多文章")
-    public ResponseResult loadMore(@RequestBody ArticleHomeDto dto) {
+    public ResponseResult loadMore(@RequestBody  ArticleHomeDto dto) {
         return apArticleService.load(ArticleConstants.LOADTYPE_LOAD_MORE,dto);
     }
 
     @PostMapping("/loadnew")
     @Operation(summary = "最新文章")
     public ResponseResult loadNew(@RequestBody ArticleHomeDto dto) {
-        System.out.println("sdsdsd");
         return apArticleService.load(ArticleConstants.LOADTYPE_LOAD_NEW,dto);
     }
 }

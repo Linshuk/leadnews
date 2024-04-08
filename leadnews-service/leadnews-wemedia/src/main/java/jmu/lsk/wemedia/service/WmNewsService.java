@@ -28,4 +28,12 @@ public interface WmNewsService extends IService<WmNews> {
      * 消费延迟队列数据
      */
     public void scanNewsByTask();
+
+
+    /**
+     * 文章的上下架
+     * @param dto
+     * @return
+     */
+    public ResponseResult downOrUp(WmNewsDto dto);
 }
