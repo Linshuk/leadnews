@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>jmu.lsk</groupId>
-        <artifactId>leadnews-service</artifactId>
+        <artifactId>leadnews-test</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>leadnews-search</artifactId>
+    <artifactId>mongo-demo</artifactId>
 
     <properties>
         <maven.compiler.source>18</maven.compiler.source>
@@ -20,30 +20,19 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
-            <exclusions>
-                <exclusion>
-                    <artifactId>elasticsearch-java</artifactId>
-                    <groupId>co.elastic.clients</groupId>
-                </exclusion>
-            </exclusions>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
         <dependency>
-            <groupId>co.elastic.clients</groupId>
-            <artifactId>elasticsearch-java</artifactId>
-            <version>7.15.2</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>jakarta.json-api</artifactId>
-                    <groupId>jakarta.json</groupId>
-                </exclusion>
-            </exclusions>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
     </dependencies>
-
 </project>

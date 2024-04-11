@@ -9,11 +9,10 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <packaging>
-        pom
-    </packaging>
+    <packaging>pom</packaging>
     <modules>
         <module>elasticsearch-init</module>
+        <module>mongo-demo</module>
     </modules>
 
     <artifactId>leadnews-test</artifactId>

@@ -1,4 +1,5 @@
 package jmu.lsk.article.service.impl;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson2.JSONArray;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import freemarker.template.Configuration;
@@ -6,11 +7,15 @@ import freemarker.template.Template;
 import jmu.lsk.article.mapper.ApArticleContentMapper;
 import jmu.lsk.article.service.ApArticleService;
 import jmu.lsk.article.service.ArticleFreemarkerService;
+import jmu.lsk.common.constants.ArticleConstants;
 import jmu.lsk.file.service.FileStorageService;
 import jmu.lsk.model.common.article.pojos.ApArticle;
+import jmu.lsk.model.common.search.vos.SearchArticleVo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -69,6 +74,20 @@ public class ArticleFreemarkerServiceImpl implements ArticleFreemarkerService {
             //4.4 修改ap_article表，保存static_url字段
             apArticleService.update(Wrappers.<ApArticle>lambdaUpdate().eq(ApArticle::getId,apArticle.getId())
                     .set(ApArticle::getStaticUrl,path));
+
+            createArticleESIndex(apArticle,content,path);
         }
+    }
+
+    @Autowired
+    private KafkaTemplate kafkaTemplate;
+
+    private void createArticleESIndex(ApArticle apArticle, String content, String path) {
+        SearchArticleVo searchArticleVo = new SearchArticleVo();
+        BeanUtils.copyProperties(apArticle,searchArticleVo);
+        searchArticleVo.setContent(content);
+        searchArticleVo.setStaticUrl(path);
+
+        kafkaTemplate.send(ArticleConstants.ARTICLE_ES_SYNC_TOPIC,JSON.toJSONString(searchArticleVo));
     }
 }

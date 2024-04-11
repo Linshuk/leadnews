@@ -1,4 +1,5 @@
 package jmu.lsk.model.common.search.dtos;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import java.util.Date;
  

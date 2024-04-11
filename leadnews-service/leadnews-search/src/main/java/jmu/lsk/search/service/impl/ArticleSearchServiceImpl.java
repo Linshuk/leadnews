@@ -3,7 +3,10 @@ import com.alibaba.fastjson2.JSON;
 import jmu.lsk.model.common.dtos.ResponseResult;
 import jmu.lsk.model.common.enums.AppHttpCodeEnum;
 import jmu.lsk.model.common.search.dtos.UserSearchDto;
+import jmu.lsk.model.common.user.pojos.ApUser;
+import jmu.lsk.search.service.ApUserSearchService;
 import jmu.lsk.search.service.ArticleSearchService;
+import jmu.lsk.utils.thread.AppThreadLocalUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.action.search.SearchRequest;
@@ -20,7 +23,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
  
@@ -30,6 +36,9 @@ public class ArticleSearchServiceImpl implements ArticleSearchService {
  
     @Autowired
     private RestHighLevelClient restHighLevelClient;
+
+    @Autowired
+    private ApUserSearchService apUserSearchService;
  
     /**
      * es文章分页检索
@@ -44,6 +53,13 @@ public class ArticleSearchServiceImpl implements ArticleSearchService {
         if(dto == null || StringUtils.isBlank(dto.getSearchWords())){
             return ResponseResult.errorResult(AppHttpCodeEnum.PARAM_INVALID);
         }
+
+        ApUser user = AppThreadLocalUtil.getUser();
+
+        //异步调用 保存搜索记录
+        if(user != null && dto.getFromIndex() == 0){
+            apUserSearchService.insert(dto.getSearchWords(), user.getId());
+        }
  
         //2.设置查询条件
         SearchRequest searchRequest = new SearchRequest("app_info_article");
@@ -57,9 +73,10 @@ public class ArticleSearchServiceImpl implements ArticleSearchService {
         boolQueryBuilder.must(queryStringQueryBuilder);
  
         //查询小于mindate的数据
-//        RangeQueryBuilder rangeQueryBuilder = QueryBuilders.rangeQuery("publishTime").lt(dto.getMinBehotTime());
-//        boolQueryBuilder.filter(rangeQueryBuilder);
- 
+
+        RangeQueryBuilder rangeQueryBuilder = QueryBuilders.rangeQuery("publishTime").format("epoch_millis").lt(dto.getMinBehotTime().getTime());
+        boolQueryBuilder.filter(rangeQueryBuilder);
+
         //分页查询
         searchSourceBuilder.from(0);
         searchSourceBuilder.size(dto.getPageSize());
