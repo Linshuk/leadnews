@@ -23,16 +23,12 @@ public class MongoTest {
     //保存
     @Test
     public void saveTest(){
-        /*for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             ApAssociateWords apAssociateWords = new ApAssociateWords();
             apAssociateWords.setAssociateWords("黑马头条");
             apAssociateWords.setCreatedTime(new Date());
             mongoTemplate.save(apAssociateWords);
-        }*/
-        ApAssociateWords apAssociateWords = new ApAssociateWords();
-        apAssociateWords.setAssociateWords("黑马直播");
-        apAssociateWords.setCreatedTime(new Date());
-        mongoTemplate.save(apAssociateWords);
+        }
     }
  
     //查询一个
