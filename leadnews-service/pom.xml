@@ -15,6 +15,7 @@
         <module>leadnews-wemedia</module>
         <module>leadnews-schedule</module>
         <module>leadnews-search</module>
+        <module>leadnews-admin</module>
     </modules>
 
     <artifactId>leadnews-service</artifactId>

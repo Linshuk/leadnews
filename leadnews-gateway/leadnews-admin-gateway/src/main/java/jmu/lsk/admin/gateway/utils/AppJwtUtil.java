@@ -1,4 +1,4 @@
-package jmu.lsk.wemedia.gateway.utils;
+package jmu.lsk.admin.gateway.utils;
 
 
 import io.jsonwebtoken.*;
@@ -26,7 +26,7 @@ public class AppJwtUtil {
                 .setIssuedAt(new Date(currentTime))  //签发时间
                 .setSubject("system")  //说明
                 .setIssuer("lsk") //签发者信息
-                .setAudience("wemedia")  //接收用户
+                .setAudience("admin")  //接收用户
                 .compressWith(CompressionCodecs.GZIP)  //数据压缩方式
                 .signWith(SignatureAlgorithm.HS512, generalKey()) //加密方式
                 .setExpiration(new Date(currentTime + TOKEN_TIME_OUT * 1000))  //过期时间戳

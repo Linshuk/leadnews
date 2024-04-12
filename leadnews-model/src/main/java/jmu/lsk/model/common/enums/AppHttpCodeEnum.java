@@ -1,5 +1,7 @@
 package jmu.lsk.model.common.enums;
 
+import javax.swing.*;
+
 public enum AppHttpCodeEnum {
 
     // 成功段0
@@ -26,7 +28,11 @@ public enum AppHttpCodeEnum {
     // 数据错误 3000~3500
     NO_OPERATOR_AUTH(3000,"无权限操作"),
     NEED_ADMIND(3001,"需要管理员权限"),
-    MATERIASL_REFERENCE_FAIL(3501, "素材引用失效");
+    MATERIASL_REFERENCE_FAIL(3501, "素材引用失效"),
+    CREATED(201,"已创建"),
+    UNAUTHORIZED(401,"权限不足"),
+    FORBIDDEN(403,"禁止操作"),
+    NOT_FOUND(404,"未查找到");
 
     int code;
     String errorMessage;
