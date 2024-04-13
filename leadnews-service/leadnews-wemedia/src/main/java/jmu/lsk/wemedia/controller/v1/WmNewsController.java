@@ -1,6 +1,8 @@
 package jmu.lsk.wemedia.controller.v1;
+import jmu.lsk.common.constants.WemediaConstants;
 import jmu.lsk.model.common.dtos.ResponseResult;
 import jmu.lsk.model.common.enums.AppHttpCodeEnum;
+import jmu.lsk.model.common.wemedia.dtos.NewsAuthDto;
 import jmu.lsk.model.common.wemedia.dtos.WmNewsDto;
 import jmu.lsk.model.common.wemedia.dtos.WmNewsPageReqDto;
 import jmu.lsk.model.common.wemedia.pojos.WmNews;
@@ -28,34 +30,33 @@ public class WmNewsController {
     }
 
     @GetMapping("/one/{id}")
-    public ResponseResult collect(@PathVariable Integer id){
-        if(id==null)
-            return ResponseResult.errorResult(AppHttpCodeEnum.DATA_NOT_EXIST);
-        WmNews wmNews = wmNewsService.getById(id);
-
-        return ResponseResult.okResult(wmNews);
-    }
+    public ResponseResult collect(@PathVariable Integer id){return wmNewsService.collect(id);}
 
     @GetMapping("/del_news/{id}")
-    public ResponseResult deleteNews(@PathVariable Integer id){
-        if(id==null)
-            return ResponseResult.errorResult(501,"文章Id不可缺少");
-        WmNews wmNews = wmNewsService.getById(id);
-
-        if(wmNews==null){
-            return ResponseResult.errorResult(1002,"文章不存在");
-        }
-        if(wmNews.getStatus()==9){
-            return ResponseResult.errorResult(501,"文章已发布，不能删除");
-        }
-        wmNewsService.removeById(id);
-        return ResponseResult.okResult(AppHttpCodeEnum.SUCCESS);
-    }
-
+    public ResponseResult deleteNews(@PathVariable Integer id){return wmNewsService.deleteNews(id);}
 
     @PostMapping("/down_or_up")
     public ResponseResult downOrUp(@RequestBody WmNewsDto dto){
         return wmNewsService.downOrUp(dto);
     }
 
+    @PostMapping("/list_vo")
+    public ResponseResult findList(@RequestBody NewsAuthDto dto){
+        return wmNewsService.findList(dto);
+    }
+
+    @GetMapping("/one_vo/{id}")
+    public ResponseResult findWmNewsVo(@PathVariable("id") Integer id){
+        return wmNewsService.findWmNewsVo(id);
+    }
+
+    @PostMapping("/auth_pass")
+    public ResponseResult authPass(@RequestBody NewsAuthDto dto){
+        return wmNewsService.updateStatus(WemediaConstants.WM_NEWS_AUTH_PASS,dto);
+    }
+
+    @PostMapping("/auth_fail")
+    public ResponseResult authFail(@RequestBody NewsAuthDto dto){
+        return wmNewsService.updateStatus(WemediaConstants.WM_NEWS_AUTH_FAIL,dto);
+    }
 }

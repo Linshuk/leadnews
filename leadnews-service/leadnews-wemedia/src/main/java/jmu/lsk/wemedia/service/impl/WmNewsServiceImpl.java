@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import jmu.lsk.apis.article.IScheduleClient;
+import jmu.lsk.common.constants.UserConstants;
 import jmu.lsk.common.constants.WemediaConstants;
 import jmu.lsk.common.constants.WmNewsMessageConstants;
 import jmu.lsk.common.exception.CustomException;
@@ -14,6 +15,8 @@ import jmu.lsk.model.common.dtos.ResponseResult;
 import jmu.lsk.model.common.enums.AppHttpCodeEnum;
 import jmu.lsk.model.common.enums.TaskTypeEnum;
 import jmu.lsk.model.common.schedule.dtos.Task;
+import jmu.lsk.model.common.user.pojos.ApUserRealname;
+import jmu.lsk.model.common.wemedia.dtos.NewsAuthDto;
 import jmu.lsk.model.common.wemedia.dtos.WmNewsDto;
 import jmu.lsk.model.common.wemedia.dtos.WmNewsPageReqDto;
 import jmu.lsk.model.common.wemedia.pojos.WmMaterial;
@@ -350,5 +353,75 @@ public class WmNewsServiceImpl  extends ServiceImpl<WmNewsMapper, WmNews> implem
 
         return ResponseResult.okResult(AppHttpCodeEnum.SUCCESS);
     }
+
+    @Override
+    public ResponseResult collect(Integer id) {
+        if(id==null)
+            return ResponseResult.errorResult(AppHttpCodeEnum.DATA_NOT_EXIST);
+        WmNews wmNews = getById(id);
+        return ResponseResult.okResult(wmNews);
+    }
+
+    @Override
+    public ResponseResult deleteNews(Integer id) {
+        if(id==null)
+            return ResponseResult.errorResult(501,"文章Id不可缺少");
+        WmNews wmNews = getById(id);
+
+        if(wmNews==null){
+            return ResponseResult.errorResult(1002,"文章不存在");
+        }
+        if(wmNews.getStatus()==9){
+            return ResponseResult.errorResult(501,"文章已发布，不能删除");
+        }
+        removeById(id);
+        return ResponseResult.okResult(AppHttpCodeEnum.SUCCESS);
+    }
+
+    @Override
+    public ResponseResult findList(NewsAuthDto dto) {
+        dto.checkParam();
+        IPage page = new Page(dto.getPage(),dto.getSize());
+        LambdaQueryWrapper<WmNews> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        if(dto.getStatus()==null){
+            lambdaQueryWrapper.select();
+        }else{
+            lambdaQueryWrapper.eq(WmNews::getStatus,dto.getStatus());
+        }
+        lambdaQueryWrapper.like(WmNews::getTitle,dto.getTitle());
+        page = page(page,lambdaQueryWrapper);
+        ResponseResult responseResult = new PageResponseResult(dto.getPage(),dto.getSize(), (int) page.getTotal());
+        responseResult.setData(page.getRecords());
+        return responseResult;
+    }
+
+    @Override
+    public ResponseResult findWmNewsVo(Integer id) {
+        WmNews wmNews = getById(id);
+        return ResponseResult.okResult(wmNews);
+    }
+
+    @Autowired
+    private WmNewsMapper wmNewsMapper;
+
+    @Override
+    public ResponseResult updateStatus(Short status, NewsAuthDto dto) {
+        dto.checkParam();
+        IPage page = new Page(dto.getPage(),dto.getSize());
+        LambdaQueryWrapper<WmNews> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        WmNews wmNews = wmNewsMapper.selectOne(Wrappers.<WmNews>lambdaQuery().eq(WmNews::getId,dto.getId()));
+        if(status.equals(UserConstants.PASS_AUTH)){
+            wmNews.setStatus(WemediaConstants.WM_NEWS_AUTH_PASS);
+            wmNewsMapper.updateById(wmNews);
+        }else{
+            wmNews.setStatus(WemediaConstants.WM_NEWS_AUTH_FAIL);
+            wmNewsMapper.updateById(wmNews);
+        }
+        page = page(page,lambdaQueryWrapper);
+        ResponseResult responseResult = new PageResponseResult(dto.getPage(),dto.getSize(), (int) page.getTotal());
+        responseResult.setData(page.getRecords());
+        return ResponseResult.okResult(AppHttpCodeEnum.SUCCESS);
+    }
+
 
 }
