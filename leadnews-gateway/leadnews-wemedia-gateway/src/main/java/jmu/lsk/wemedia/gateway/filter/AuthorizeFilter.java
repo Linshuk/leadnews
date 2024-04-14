@@ -53,7 +53,7 @@ public class AuthorizeFilter implements Ordered, GlobalFilter {
                 httpHeaders.add("userId",userId+"");
             }).build();
 
-            exchange.mutate().request(serverHttpRequest);
+            exchange.mutate().request(serverHttpRequest).build();
 
 
 

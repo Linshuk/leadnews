@@ -8,26 +8,40 @@ import jmu.lsk.article.mapper.ApArticleMapper;
 import jmu.lsk.article.service.ApArticleService;
 import jmu.lsk.article.service.ArticleFreemarkerService;
 import jmu.lsk.common.constants.ArticleConstants;
-import jmu.lsk.model.common.article.dtos.ArticleDto;
-import jmu.lsk.model.common.article.dtos.ArticleHomeDto;
-import jmu.lsk.model.common.article.pojos.ApArticle;
-import jmu.lsk.model.common.article.pojos.ApArticleConfig;
-import jmu.lsk.model.common.article.pojos.ApArticleContent;
+import jmu.lsk.common.exception.CustException;
+import jmu.lsk.common.redis.CacheService;
+import jmu.lsk.model.article.dtos.ArticleDto;
+import jmu.lsk.model.article.dtos.ArticleHomeDto;
+import jmu.lsk.model.article.dtos.ArticleInfoDto;
+import jmu.lsk.model.article.pojos.ApArticle;
+import jmu.lsk.model.article.pojos.ApArticleConfig;
+import jmu.lsk.model.article.pojos.ApArticleContent;
+import jmu.lsk.model.behavior.pojos.ApBehaviorEntry;
+import jmu.lsk.model.behavior.pojos.ApCollection;
+import jmu.lsk.model.behavior.pojos.ApLikesBehavior;
+import jmu.lsk.model.behavior.pojos.ApUnlikesBehavior;
+import jmu.lsk.model.common.constant.UserRelationConstants;
 import jmu.lsk.model.common.dtos.ResponseResult;
 import jmu.lsk.model.common.enums.AppHttpCodeEnum;
+import jmu.lsk.model.user.pojos.ApUser;
+import jmu.lsk.utils.thread.AppThreadLocalUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.checkerframework.checker.units.qual.A;
+import org.apache.kafka.common.protocol.types.Field;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
  
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
- 
- 
+import java.util.Map;
+
+
 @Service
 @Transactional
 @Slf4j

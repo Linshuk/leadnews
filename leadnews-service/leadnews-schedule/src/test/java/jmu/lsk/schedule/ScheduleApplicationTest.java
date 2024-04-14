@@ -3,7 +3,7 @@ package jmu.lsk.schedule;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.nacos.shaded.javax.annotation.Nullable;
 import jmu.lsk.common.redis.CacheService;
-import jmu.lsk.model.common.schedule.dtos.Task;
+import jmu.lsk.model.schedule.dtos.Task;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +15,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 
 import java.util.*;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)

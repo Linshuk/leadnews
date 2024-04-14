@@ -1,6 +1,6 @@
 package jmu.lsk.search.service;
 import jmu.lsk.model.common.dtos.ResponseResult;
-import jmu.lsk.model.common.search.dtos.UserSearchDto;
+import jmu.lsk.model.search.dtos.UserSearchDto;
 
 import java.io.IOException;
  

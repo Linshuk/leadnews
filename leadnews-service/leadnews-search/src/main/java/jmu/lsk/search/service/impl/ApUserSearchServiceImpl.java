@@ -2,8 +2,8 @@ package jmu.lsk.search.service.impl;
 
 import jmu.lsk.model.common.dtos.ResponseResult;
 import jmu.lsk.model.common.enums.AppHttpCodeEnum;
-import jmu.lsk.model.common.search.dtos.HistorySearchDto;
-import jmu.lsk.model.common.user.pojos.ApUser;
+import jmu.lsk.model.search.dtos.HistorySearchDto;
+import jmu.lsk.model.user.pojos.ApUser;
 import jmu.lsk.search.pojos.ApUserSearch;
 import jmu.lsk.search.service.ApUserSearchService;
 import jmu.lsk.utils.thread.AppThreadLocalUtil;
@@ -82,11 +82,9 @@ public class ApUserSearchServiceImpl implements ApUserSearchService {
      * @return
      */
     @Override
-    public ResponseResult delUserSearch(HistorySearchDto dto) {
+    public ResponseResult delUserSearch(String dto) {
         //1.检查参数
-        if(dto.getId() == null){
-            return ResponseResult.errorResult(AppHttpCodeEnum.PARAM_INVALID);
-        }
+
 
         //2.判断是否登录
         ApUser user = AppThreadLocalUtil.getUser();
@@ -95,7 +93,7 @@ public class ApUserSearchServiceImpl implements ApUserSearchService {
         }
 
         //3.删除
-        mongoTemplate.remove(Query.query(Criteria.where("userId").is(user.getId()).and("id").is(dto.getId())),ApUserSearch.class);
+        mongoTemplate.remove(Query.query(Criteria.where("userId").is(user.getId()).and("id").is(dto)),ApUserSearch.class);
         return ResponseResult.okResult(AppHttpCodeEnum.SUCCESS);
     }
 }

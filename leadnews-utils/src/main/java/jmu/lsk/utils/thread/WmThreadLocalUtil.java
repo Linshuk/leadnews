@@ -1,7 +1,7 @@
 package jmu.lsk.utils.thread;
 
 
-import jmu.lsk.model.common.wemedia.pojos.WmUser;
+import jmu.lsk.model.wemedia.pojos.WmUser;
 
 public class WmThreadLocalUtil {
  

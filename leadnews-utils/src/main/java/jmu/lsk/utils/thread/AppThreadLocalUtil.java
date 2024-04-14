@@ -1,8 +1,6 @@
 package jmu.lsk.utils.thread;
 
-import jmu.lsk.model.common.user.pojos.ApUser;
-import jmu.lsk.model.common.wemedia.pojos.WmUser;
-import org.apache.commons.lang3.LocaleUtils;
+import jmu.lsk.model.user.pojos.ApUser;
 
 public class AppThreadLocalUtil {
     private final static ThreadLocal<ApUser> AP_USER_THREAD_LOCAL = new ThreadLocal<>();

@@ -1,7 +1,7 @@
 package jmu.lsk.search.controller.v1;
 
 import jmu.lsk.model.common.dtos.ResponseResult;
-import jmu.lsk.model.common.search.dtos.UserSearchDto;
+import jmu.lsk.model.search.dtos.UserSearchDto;
 import jmu.lsk.search.service.ApAssociateWordsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

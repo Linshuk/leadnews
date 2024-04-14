@@ -2,8 +2,8 @@ package jmu.lsk.wemedia.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import jmu.lsk.model.common.dtos.ResponseResult;
-import jmu.lsk.model.common.wemedia.dtos.SensitiveDto;
-import jmu.lsk.model.common.wemedia.pojos.WmSensitive;
+import jmu.lsk.model.wemedia.dtos.SensitiveDto;
+import jmu.lsk.model.wemedia.pojos.WmSensitive;
 
 
 public interface WmSensitiveService extends IService<WmSensitive> {

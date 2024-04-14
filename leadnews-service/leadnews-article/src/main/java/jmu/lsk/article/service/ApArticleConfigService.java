@@ -3,7 +3,7 @@ package jmu.lsk.article.service;
 
  
 import com.baomidou.mybatisplus.extension.service.IService;
-import jmu.lsk.model.common.article.pojos.ApArticleConfig;
+import jmu.lsk.model.article.pojos.ApArticleConfig;
 
 import java.util.Map;
  

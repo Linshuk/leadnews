@@ -19,8 +19,9 @@ public class MongoTest {
  
     @Autowired
     private MongoTemplate mongoTemplate;
- 
+
     //保存
+
     @Test
     public void saveTest(){
         for (int i = 0; i < 20; i++) {

@@ -24,6 +24,11 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
+            <groupId>jmu.lsk</groupId>
+            <artifactId>leadnews-utils</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
         </dependency>

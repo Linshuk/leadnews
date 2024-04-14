@@ -3,9 +3,12 @@ package jmu.lsk.article.controller.v1;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jmu.lsk.article.service.ApArticleBehaviorService;
 import jmu.lsk.article.service.ApArticleService;
-import jmu.lsk.file.service.FileStorageService;
-import jmu.lsk.model.common.article.dtos.ArticleHomeDto;
+import jmu.lsk.model.article.dtos.ArticleDto;
+import jmu.lsk.model.article.dtos.ArticleHomeDto;
+import jmu.lsk.model.article.dtos.ArticleInfoDto;
+import jmu.lsk.model.behavior.dtos.ArticleBehaviorDTO;
 import jmu.lsk.model.common.dtos.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,5 +41,12 @@ public class ArticleHomeController {
     @Operation(summary = "最新文章")
     public ResponseResult loadNew(@RequestBody ArticleHomeDto dto) {
         return apArticleService.load(ArticleConstants.LOADTYPE_LOAD_NEW,dto);
+    }
+
+    @Autowired
+    ApArticleBehaviorService apArticleBehaviorService;
+    @PostMapping("/load_article_behavior")
+    public ResponseResult loadArticleBehavior(@RequestBody ArticleBehaviorDTO dto){
+        return apArticleBehaviorService.loadArticleBehavior(dto);
     }
 }

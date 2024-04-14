@@ -2,8 +2,8 @@ package jmu.lsk.wemedia.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import jmu.lsk.model.common.dtos.ResponseResult;
-import jmu.lsk.model.common.wemedia.dtos.WmMaterialDto;
-import jmu.lsk.model.common.wemedia.pojos.WmMaterial;
+import jmu.lsk.model.wemedia.dtos.WmMaterialDto;
+import jmu.lsk.model.wemedia.pojos.WmMaterial;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface WmMaterialService extends IService<WmMaterial> {

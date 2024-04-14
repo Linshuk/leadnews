@@ -111,9 +111,12 @@ public class AppJwtUtil {
        /* Map map = new HashMap();
         map.put("id","11");*/
         System.out.println(AppJwtUtil.getToken(1232L));
-        Jws<Claims> jws = AppJwtUtil.getJws("eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAC2L0QqDMAxF_yXPFkxsU-ffpLOFug0KqbAh_vsieJ_O5XAO2HqFBZiIZikPR3PKzo9FnDwTucxi8yUxTzBAlQ4LRsQQYmAcQPdktf6058_lVe2-9WUs-2osrRnnb7s7Rry6ag5p8ucf8btrQ4EAAAA.In8-mXuIFdyhmurqXbfrQ7qeX7vKejqvTHAvUBMNF4vgA8EjrwHHVmxu79hAiHfB-ggMDUEF2s9tbcCHfHoyVQ");
-        Claims claims = jws.getBody();
-        System.out.println(claims.get("id"));
+//        Jws<Claims> jws = AppJwtUtil.getJws("eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAC2L0QqDMAxF_yXPFkxsU-ffpLOFug0KqbAh_vsieJ_O5XAO2HqFBZiIZikPR3PKzo9FnDwTucxi8yUxTzBAlQ4LRsQQYmAcQPdktf6058_lVe2-9WUs-2osrRnnb7s7Rry6ag5p8ucf8btrQ4EAAAA.In8-mXuIFdyhmurqXbfrQ7qeX7vKejqvTHAvUBMNF4vgA8EjrwHHVmxu79hAiHfB-ggMDUEF2s9tbcCHfHoyVQ");
+        Jws<Claims> ss = AppJwtUtil.getJws("eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAA_zWL0QrDIAwA_yXPFeqiVfo3iaZgu4EQCxuj_770YW93HPeFfTRYgRPFbSN2OcTiQkZyLAVdfNSZhUpl8TBBowGrTx7ngD7jBHqy3frRIa-7q5o-9TCmsxpT78by7v9vSffXrC3XD9pcTFd-AAAA.Habz_PBT7bSU9xpfwIKJEOhmK-VBsrmMUww8hI-sXtDRyLloWbzYJUeFMRCmbTHazAPVEh2xYTsX-zGBbn9Byg");
+//        Claims claims = jws.getBody();
+        Claims claims1 = ss.getBody();
+//        System.out.println(claims.get("id"));
+        System.out.println(claims1.get("id"));
 
     }
 

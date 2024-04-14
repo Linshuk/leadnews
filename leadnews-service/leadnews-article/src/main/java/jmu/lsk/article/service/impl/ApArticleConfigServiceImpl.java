@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import jmu.lsk.article.mapper.ApArticleConfigMapper;
 import jmu.lsk.article.service.ApArticleConfigService;
-import jmu.lsk.model.common.article.pojos.ApArticleConfig;
+import jmu.lsk.model.article.pojos.ApArticleConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

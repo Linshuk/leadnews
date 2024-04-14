@@ -2,8 +2,8 @@ package jmu.lsk.search.service.impl;
 import com.alibaba.fastjson2.JSON;
 import jmu.lsk.model.common.dtos.ResponseResult;
 import jmu.lsk.model.common.enums.AppHttpCodeEnum;
-import jmu.lsk.model.common.search.dtos.UserSearchDto;
-import jmu.lsk.model.common.user.pojos.ApUser;
+import jmu.lsk.model.search.dtos.UserSearchDto;
+import jmu.lsk.model.user.pojos.ApUser;
 import jmu.lsk.search.service.ApUserSearchService;
 import jmu.lsk.search.service.ArticleSearchService;
 import jmu.lsk.utils.thread.AppThreadLocalUtil;
@@ -23,10 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
  

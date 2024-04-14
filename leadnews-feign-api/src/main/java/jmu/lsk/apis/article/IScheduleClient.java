@@ -1,6 +1,6 @@
 package jmu.lsk.apis.article;
 import jmu.lsk.model.common.dtos.ResponseResult;
-import jmu.lsk.model.common.schedule.dtos.Task;
+import jmu.lsk.model.schedule.dtos.Task;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

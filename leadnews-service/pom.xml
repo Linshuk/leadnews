@@ -16,6 +16,7 @@
         <module>leadnews-schedule</module>
         <module>leadnews-search</module>
         <module>leadnews-admin</module>
+        <module>leadnews-behavior</module>
     </modules>
 
     <artifactId>leadnews-service</artifactId>

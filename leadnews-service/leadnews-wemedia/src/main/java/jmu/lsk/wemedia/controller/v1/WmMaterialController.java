@@ -2,10 +2,9 @@ package jmu.lsk.wemedia.controller.v1;
 
 import jmu.lsk.model.common.dtos.ResponseResult;
 import jmu.lsk.model.common.enums.AppHttpCodeEnum;
-import jmu.lsk.model.common.wemedia.dtos.WmMaterialDto;
-import jmu.lsk.model.common.wemedia.pojos.WmMaterial;
+import jmu.lsk.model.wemedia.dtos.WmMaterialDto;
+import jmu.lsk.model.wemedia.pojos.WmMaterial;
 import jmu.lsk.wemedia.service.WmMaterialService;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;

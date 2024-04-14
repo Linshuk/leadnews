@@ -3,14 +3,10 @@ package jmu.lsk.wemedia.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import jmu.lsk.model.common.dtos.ResponseResult;
-import jmu.lsk.model.common.wemedia.dtos.NewsAuthDto;
-import jmu.lsk.model.common.wemedia.dtos.WmNewsDto;
-import jmu.lsk.model.common.wemedia.dtos.WmNewsPageReqDto;
-import jmu.lsk.model.common.wemedia.pojos.WmNews;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import jmu.lsk.model.wemedia.dtos.NewsAuthDto;
+import jmu.lsk.model.wemedia.dtos.WmNewsDto;
+import jmu.lsk.model.wemedia.dtos.WmNewsPageReqDto;
+import jmu.lsk.model.wemedia.pojos.WmNews;
 
 public interface WmNewsService extends IService<WmNews> {
  

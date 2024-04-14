@@ -1,7 +1,7 @@
 package jmu.lsk.admin.controller.v1;
 
 import jmu.lsk.admin.service.AdUserService;
-import jmu.lsk.model.common.admin.dtos.AdLoginDto;
+import jmu.lsk.model.admin.dtos.AdLoginDto;
 import jmu.lsk.model.common.dtos.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

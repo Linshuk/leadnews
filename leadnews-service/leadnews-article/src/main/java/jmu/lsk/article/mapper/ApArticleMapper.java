@@ -1,8 +1,8 @@
 package jmu.lsk.article.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import jmu.lsk.model.common.article.dtos.ArticleHomeDto;
-import jmu.lsk.model.common.article.pojos.ApArticle;
+import jmu.lsk.model.article.dtos.ArticleHomeDto;
+import jmu.lsk.model.article.pojos.ApArticle;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
  

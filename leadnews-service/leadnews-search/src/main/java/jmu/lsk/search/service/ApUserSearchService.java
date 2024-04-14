@@ -1,7 +1,7 @@
 package jmu.lsk.search.service;
 
 import jmu.lsk.model.common.dtos.ResponseResult;
-import jmu.lsk.model.common.search.dtos.HistorySearchDto;
+import jmu.lsk.model.search.dtos.HistorySearchDto;
 
 public interface ApUserSearchService {
  
@@ -20,5 +20,5 @@ public interface ApUserSearchService {
      @param historySearchDto
      @return
      */
-    ResponseResult delUserSearch(HistorySearchDto historySearchDto);
+    ResponseResult delUserSearch(String historySearchDto);
 }

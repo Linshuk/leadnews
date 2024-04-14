@@ -2,7 +2,7 @@ package jmu.lsk.wemedia.mapper;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import jmu.lsk.model.common.wemedia.pojos.WmUser;
+import jmu.lsk.model.wemedia.pojos.WmUser;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

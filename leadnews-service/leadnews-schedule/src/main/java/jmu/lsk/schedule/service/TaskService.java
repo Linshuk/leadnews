@@ -1,6 +1,6 @@
 package jmu.lsk.schedule.service;
 
-import jmu.lsk.model.common.schedule.dtos.Task;
+import jmu.lsk.model.schedule.dtos.Task;
 
 /**
  * 对外访问接口

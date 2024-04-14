@@ -2,7 +2,7 @@ package jmu.lsk.schedule.mapper;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import jmu.lsk.model.common.schedule.pojos.TaskinfoLogs;
+import jmu.lsk.model.schedule.pojos.TaskinfoLogs;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

@@ -1,7 +1,7 @@
 package jmu.lsk.search.listener;
 import com.alibaba.fastjson2.JSON;
 import jmu.lsk.common.constants.ArticleConstants;
-import jmu.lsk.model.common.search.vos.SearchArticleVo;
+import jmu.lsk.model.search.vos.SearchArticleVo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.action.index.IndexRequest;

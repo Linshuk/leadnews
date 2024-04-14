@@ -32,7 +32,7 @@ public enum AppHttpCodeEnum {
     CREATED(201,"已创建"),
     UNAUTHORIZED(401,"权限不足"),
     FORBIDDEN(403,"禁止操作"),
-    NOT_FOUND(404,"未查找到");
+    NOT_FOUND(404,"未查找到"), DATA_NOT_ALLOW(202, "不能关注自己");
 
     int code;
     String errorMessage;

@@ -1,6 +1,6 @@
 package jmu.lsk.wemedia.intercepet;
  
-import jmu.lsk.model.common.wemedia.pojos.WmUser;
+import jmu.lsk.model.wemedia.pojos.WmUser;
 import jmu.lsk.utils.thread.WmThreadLocalUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -23,6 +23,7 @@ public class WmTokenInterceptor implements HandlerInterceptor {
             WmUser wmUser = new WmUser();
             wmUser.setId(Integer.valueOf(userId));
             WmThreadLocalUtil.setUser(wmUser);
+            System.out.println(wmUser);
             log.info("wmTokenFilter设置用户信息到threadlocal中...");
         }
  

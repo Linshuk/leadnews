@@ -1,7 +1,7 @@
 package jmu.lsk.article.service;
 
 
-import jmu.lsk.model.common.article.pojos.ApArticle;
+import jmu.lsk.model.article.pojos.ApArticle;
 
 public interface ArticleFreemarkerService {
  

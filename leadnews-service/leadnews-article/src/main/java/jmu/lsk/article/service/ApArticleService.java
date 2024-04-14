@@ -2,9 +2,10 @@ package jmu.lsk.article.service;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import jmu.lsk.model.common.article.dtos.ArticleDto;
-import jmu.lsk.model.common.article.dtos.ArticleHomeDto;
-import jmu.lsk.model.common.article.pojos.ApArticle;
+import jmu.lsk.model.article.dtos.ArticleDto;
+import jmu.lsk.model.article.dtos.ArticleHomeDto;
+import jmu.lsk.model.article.dtos.ArticleInfoDto;
+import jmu.lsk.model.article.pojos.ApArticle;
 import jmu.lsk.model.common.dtos.ResponseResult;
 
 public interface ApArticleService extends IService<ApArticle> {
@@ -18,4 +19,5 @@ public interface ApArticleService extends IService<ApArticle> {
     ResponseResult load(Short loadtype, ArticleHomeDto dto);
 
     ResponseResult saveArticle(ArticleDto dto);
+
 }

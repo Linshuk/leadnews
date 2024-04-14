@@ -1,13 +1,10 @@
 package jmu.lsk.wemedia.controller.v1;
 import jmu.lsk.common.constants.WemediaConstants;
 import jmu.lsk.model.common.dtos.ResponseResult;
-import jmu.lsk.model.common.enums.AppHttpCodeEnum;
-import jmu.lsk.model.common.wemedia.dtos.NewsAuthDto;
-import jmu.lsk.model.common.wemedia.dtos.WmNewsDto;
-import jmu.lsk.model.common.wemedia.dtos.WmNewsPageReqDto;
-import jmu.lsk.model.common.wemedia.pojos.WmNews;
+import jmu.lsk.model.wemedia.dtos.NewsAuthDto;
+import jmu.lsk.model.wemedia.dtos.WmNewsDto;
+import jmu.lsk.model.wemedia.dtos.WmNewsPageReqDto;
 import jmu.lsk.wemedia.service.WmNewsService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

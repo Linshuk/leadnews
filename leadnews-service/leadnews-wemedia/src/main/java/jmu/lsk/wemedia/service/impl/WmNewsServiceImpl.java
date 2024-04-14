@@ -5,29 +5,24 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import jmu.lsk.apis.article.IArticleClient;
 import jmu.lsk.apis.article.IScheduleClient;
-import jmu.lsk.common.constants.UserConstants;
 import jmu.lsk.common.constants.WemediaConstants;
 import jmu.lsk.common.constants.WmNewsMessageConstants;
 import jmu.lsk.common.exception.CustomException;
+import jmu.lsk.model.article.dtos.ArticleDto;
 import jmu.lsk.model.common.dtos.PageResponseResult;
 import jmu.lsk.model.common.dtos.ResponseResult;
 import jmu.lsk.model.common.enums.AppHttpCodeEnum;
 import jmu.lsk.model.common.enums.TaskTypeEnum;
-import jmu.lsk.model.common.schedule.dtos.Task;
-import jmu.lsk.model.common.user.pojos.ApUserRealname;
-import jmu.lsk.model.common.wemedia.dtos.NewsAuthDto;
-import jmu.lsk.model.common.wemedia.dtos.WmNewsDto;
-import jmu.lsk.model.common.wemedia.dtos.WmNewsPageReqDto;
-import jmu.lsk.model.common.wemedia.pojos.WmMaterial;
-import jmu.lsk.model.common.wemedia.pojos.WmNews;
-import jmu.lsk.model.common.wemedia.pojos.WmNewsMaterial;
-import jmu.lsk.model.common.wemedia.pojos.WmUser;
+import jmu.lsk.model.schedule.dtos.Task;
+import jmu.lsk.model.wemedia.dtos.NewsAuthDto;
+import jmu.lsk.model.wemedia.dtos.WmNewsDto;
+import jmu.lsk.model.wemedia.dtos.WmNewsPageReqDto;
+import jmu.lsk.model.wemedia.pojos.*;
 import jmu.lsk.utils.common.ProtostuffUtil;
 import jmu.lsk.utils.thread.WmThreadLocalUtil;
-import jmu.lsk.wemedia.mapper.WmMaterialMapper;
-import jmu.lsk.wemedia.mapper.WmNewsMapper;
-import jmu.lsk.wemedia.mapper.WmNewsMaterialMapper;
+import jmu.lsk.wemedia.mapper.*;
 import jmu.lsk.wemedia.service.WmNewsAutoScanService;
 import jmu.lsk.wemedia.service.WmNewsService;
 import jmu.lsk.wemedia.service.WmNewsTaskService;
@@ -36,6 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -306,7 +302,6 @@ public class WmNewsServiceImpl  extends ServiceImpl<WmNewsMapper, WmNews> implem
     @SneakyThrows
     public void scanNewsByTask() {
 
-        log.info("文章审核---消费任务执行---begin---");
 
         ResponseResult responseResult = scheduleClient.poll(TaskTypeEnum.NEWS_SCAN_TIME.getTaskType(), TaskTypeEnum.NEWS_SCAN_TIME.getPriority());
         if(responseResult.getCode().equals(200) && responseResult.getData() != null){
@@ -317,7 +312,6 @@ public class WmNewsServiceImpl  extends ServiceImpl<WmNewsMapper, WmNews> implem
             System.out.println(wmNews.getId()+"-----------");
             wmNewsAutoScanService.autoScanWmNews(wmNews.getId());
         }
-        log.info("文章审核---消费任务执行---end---");
     }
 
     @Autowired
@@ -404,24 +398,76 @@ public class WmNewsServiceImpl  extends ServiceImpl<WmNewsMapper, WmNews> implem
     @Autowired
     private WmNewsMapper wmNewsMapper;
 
+
+
     @Override
     public ResponseResult updateStatus(Short status, NewsAuthDto dto) {
         dto.checkParam();
-        IPage page = new Page(dto.getPage(),dto.getSize());
-        LambdaQueryWrapper<WmNews> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         WmNews wmNews = wmNewsMapper.selectOne(Wrappers.<WmNews>lambdaQuery().eq(WmNews::getId,dto.getId()));
-        if(status.equals(UserConstants.PASS_AUTH)){
+        if(status.equals(WemediaConstants.WM_NEWS_AUTH_PASS)){
+            ResponseResult responseResult = saveAppArticle(wmNews);
             wmNews.setStatus(WemediaConstants.WM_NEWS_AUTH_PASS);
+            wmNews.setReason("人工审核成功");
             wmNewsMapper.updateById(wmNews);
-        }else{
+            wmNews.setArticleId((Long) responseResult.getData());
+
+            if(!responseResult.getCode().equals(200)){
+                throw new RuntimeException("WmNewsAutoScanServiceImpl-文章审核，保存app端相关文章数据失败");
+            }
+        }else if(status.equals(WemediaConstants.WM_NEWS_AUTH_FAIL)){
+            if(dto.getMsg()==null){
+                wmNews.setReason("");
+            }else {
+                wmNews.setReason(dto.getMsg());
+            }
+
             wmNews.setStatus(WemediaConstants.WM_NEWS_AUTH_FAIL);
             wmNewsMapper.updateById(wmNews);
         }
-        page = page(page,lambdaQueryWrapper);
-        ResponseResult responseResult = new PageResponseResult(dto.getPage(),dto.getSize(), (int) page.getTotal());
-        responseResult.setData(page.getRecords());
         return ResponseResult.okResult(AppHttpCodeEnum.SUCCESS);
     }
 
+    /**
+     * 保存app端相关的文章数据
+     * @param wmNews
+     */
+    @Autowired
+    private WmChannelMapper wmChannelMapper;
 
+    @Autowired
+    private WmUserMapper wmUserMapper;
+
+    @Qualifier("jmu.lsk.apis.article.IArticleClient")
+    @Autowired
+    private IArticleClient articleClient;
+
+    private ResponseResult saveAppArticle(WmNews wmNews) {
+
+        ArticleDto dto = new ArticleDto();
+        //属性的拷贝
+        BeanUtils.copyProperties(wmNews,dto);
+        //文章的布局
+        dto.setLayout(wmNews.getType());
+        //频道
+        WmChannel wmChannel = wmChannelMapper.selectById(wmNews.getChannelId());
+        if(wmChannel != null){
+            dto.setChannelName(wmChannel.getName());
+        }
+
+        //作者
+        dto.setAuthorId(wmNews.getUserId().longValue());
+        WmUser wmUser = wmUserMapper.selectById(wmNews.getUserId());
+        if(wmUser != null){
+            dto.setAuthorName(wmUser.getName());
+        }
+
+        //设置文章id
+        if(wmNews.getArticleId() != null){
+            dto.setId(wmNews.getArticleId());
+        }
+        dto.setCreatedTime(new Date());
+
+        ResponseResult responseResult = articleClient.saveArticle(dto);
+        return responseResult;
+    }
 }

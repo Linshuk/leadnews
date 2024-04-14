@@ -3,7 +3,7 @@ package jmu.lsk.user.controller.v1;
 
 import jmu.lsk.common.constants.UserConstants;
 import jmu.lsk.model.common.dtos.ResponseResult;
-import jmu.lsk.model.common.user.dtos.AuthDto;
+import jmu.lsk.model.user.dtos.AuthDto;
 import jmu.lsk.user.service.ApUserRealnameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

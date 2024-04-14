@@ -4,17 +4,15 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import jmu.lsk.admin.mapper.AdUserMapper;
 import jmu.lsk.admin.service.AdUserService;
-import jmu.lsk.model.common.admin.dtos.AdLoginDto;
-import jmu.lsk.model.common.admin.pojos.AdUser;
+import jmu.lsk.model.admin.dtos.AdLoginDto;
+import jmu.lsk.model.admin.pojos.AdUser;
 import jmu.lsk.model.common.dtos.ResponseResult;
 import jmu.lsk.model.common.enums.AppHttpCodeEnum;
 import jmu.lsk.utils.common.AppJwtUtil;
-import jmu.lsk.utils.common.MD5Utils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
-import java.sql.Wrapper;
 import java.util.HashMap;
 import java.util.Map;
 

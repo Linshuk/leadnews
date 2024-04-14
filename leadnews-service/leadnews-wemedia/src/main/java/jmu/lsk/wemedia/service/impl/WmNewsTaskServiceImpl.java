@@ -1,8 +1,8 @@
 package jmu.lsk.wemedia.service.impl;
 import jmu.lsk.apis.article.IScheduleClient;
 import jmu.lsk.model.common.enums.TaskTypeEnum;
-import jmu.lsk.model.common.schedule.dtos.Task;
-import jmu.lsk.model.common.wemedia.pojos.WmNews;
+import jmu.lsk.model.schedule.dtos.Task;
+import jmu.lsk.model.wemedia.pojos.WmNews;
 import jmu.lsk.utils.common.ProtostuffUtil;
 import jmu.lsk.wemedia.service.WmNewsTaskService;
 import lombok.extern.slf4j.Slf4j;

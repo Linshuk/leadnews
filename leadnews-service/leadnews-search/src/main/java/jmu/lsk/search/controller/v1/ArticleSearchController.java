@@ -1,6 +1,6 @@
 package jmu.lsk.search.controller.v1;
 import jmu.lsk.model.common.dtos.ResponseResult;
-import jmu.lsk.model.common.search.dtos.UserSearchDto;
+import jmu.lsk.model.search.dtos.UserSearchDto;
 import jmu.lsk.search.service.ArticleSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

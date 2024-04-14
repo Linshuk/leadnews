@@ -1,14 +1,17 @@
  
 package jmu.lsk.user.controller.v1;
 
+import com.alibaba.fastjson2.JSON;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jmu.lsk.model.common.dtos.ResponseResult;
-import jmu.lsk.model.common.user.dtos.LoginDto;
+import jmu.lsk.model.user.dtos.LoginDto;
 import jmu.lsk.user.service.ApUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 
 @RestController
@@ -21,7 +24,10 @@ public class ApUserLoginController {
 
     @PostMapping("/login_auth")
     @Operation(summary = "用户登录")
-    public ResponseResult login(@Parameter(description = "登录信息") LoginDto dto){
-        return apUserService.login(dto);
+    public ResponseResult login(String dto){
+        LoginDto dto1 = new LoginDto();
+        dto1.setPhone("12345678910");
+        dto1.setPassword("123456");
+        return apUserService.login(dto1);
     }
 }

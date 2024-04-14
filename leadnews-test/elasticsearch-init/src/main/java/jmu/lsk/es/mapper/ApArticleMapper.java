@@ -3,10 +3,9 @@ package jmu.lsk.es.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import jmu.lsk.es.pojo.SearchArticleVo;
-import jmu.lsk.model.common.article.pojos.ApArticle;
+import jmu.lsk.model.article.pojos.ApArticle;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.io.Serializable;
 import java.util.List;
 
 @Mapper

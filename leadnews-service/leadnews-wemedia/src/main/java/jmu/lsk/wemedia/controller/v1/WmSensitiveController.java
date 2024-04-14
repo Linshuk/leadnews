@@ -1,8 +1,8 @@
 package jmu.lsk.wemedia.controller.v1;
 
 import jmu.lsk.model.common.dtos.ResponseResult;
-import jmu.lsk.model.common.wemedia.dtos.SensitiveDto;
-import jmu.lsk.model.common.wemedia.pojos.WmSensitive;
+import jmu.lsk.model.wemedia.dtos.SensitiveDto;
+import jmu.lsk.model.wemedia.pojos.WmSensitive;
 import jmu.lsk.wemedia.service.WmSensitiveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

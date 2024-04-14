@@ -6,8 +6,8 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import jmu.lsk.model.common.dtos.ResponseResult;
 import jmu.lsk.model.common.enums.AppHttpCodeEnum;
-import jmu.lsk.model.common.user.dtos.LoginDto;
-import jmu.lsk.model.common.user.pojos.ApUser;
+import jmu.lsk.model.user.dtos.LoginDto;
+import jmu.lsk.model.user.pojos.ApUser;
 import jmu.lsk.user.mapper.ApUserMapper;
 import jmu.lsk.user.service.ApUserService;
 import jmu.lsk.utils.common.AppJwtUtil;
@@ -47,7 +47,8 @@ public class ApUserServiceImpl extends ServiceImpl<ApUserMapper, ApUser> impleme
                 apUser.setPassword("");
                 map.put("user", apUser);
                 return ResponseResult.okResult(map);
-            } else {
+            }
+            else {
                 //2.游客  同样返回token  id = 0
                 Map<String, Object> map = new HashMap<>();
                 map.put("token", AppJwtUtil.getToken(0l));

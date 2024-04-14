@@ -1,6 +1,6 @@
 package jmu.lsk.search.intercepet;
 
-import jmu.lsk.model.common.user.pojos.ApUser;
+import jmu.lsk.model.user.pojos.ApUser;
 import jmu.lsk.utils.thread.AppThreadLocalUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -22,6 +22,7 @@ public class AppTokenInterceptor implements HandlerInterceptor {
             ApUser apUser = new ApUser();
             apUser.setId(Integer.valueOf(userId));
             AppThreadLocalUtil.setUser(apUser);
+            System.out.println(apUser);
             log.info("AppTokenFilter设置用户信息到threadlocal中...");
         }
 

@@ -1,7 +1,7 @@
 package jmu.lsk.search.service.impl;
 import jmu.lsk.model.common.dtos.ResponseResult;
 import jmu.lsk.model.common.enums.AppHttpCodeEnum;
-import jmu.lsk.model.common.search.dtos.UserSearchDto;
+import jmu.lsk.model.search.dtos.UserSearchDto;
 import jmu.lsk.search.pojos.ApAssociateWords;
 import jmu.lsk.search.service.ApAssociateWordsService;
 import org.apache.commons.lang3.StringUtils;

@@ -9,4 +9,7 @@ public class UserConstants {
 
     public static Short FAIL = 2;
 
+    public static Short FOLLOW = 0;
+
+    public static Short FOLLOW_CANCEL = 1;
 }

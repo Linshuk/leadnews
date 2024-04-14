@@ -3,4 +3,5 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   jmu.lsk.common.springdoc.SpringdocConfig,\
   jmu.lsk.common.aliyun.GreenImageScan,\
   jmu.lsk.common.aliyun.GreenTextScan,\
-  jmu.lsk.common.redis.CacheService
+  jmu.lsk.common.redis.CacheService,\
+  jmu.lsk.common.jackson.InitJacksonConfig

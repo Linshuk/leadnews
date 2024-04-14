@@ -1,7 +1,7 @@
 package jmu.lsk.schedule.feign;
 import jmu.lsk.apis.article.IScheduleClient;
 import jmu.lsk.model.common.dtos.ResponseResult;
-import jmu.lsk.model.common.schedule.dtos.Task;
+import jmu.lsk.model.schedule.dtos.Task;
 import jmu.lsk.schedule.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

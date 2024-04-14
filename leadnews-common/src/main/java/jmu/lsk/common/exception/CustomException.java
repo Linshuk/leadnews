@@ -11,6 +11,10 @@ public class CustomException extends RuntimeException {
         this.appHttpCodeEnum = appHttpCodeEnum;
     }
 
+    public CustomException(AppHttpCodeEnum appHttpCodeEnum, String msg){
+        this.appHttpCodeEnum = appHttpCodeEnum;
+    }
+
     public AppHttpCodeEnum getAppHttpCodeEnum() {
         return appHttpCodeEnum;
     }
