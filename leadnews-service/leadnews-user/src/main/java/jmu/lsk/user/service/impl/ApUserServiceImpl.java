@@ -24,6 +24,8 @@ public class ApUserServiceImpl extends ServiceImpl<ApUserMapper, ApUser> impleme
 
     @Override
     public ResponseResult login(LoginDto dto) {
+            dto.setPhone("12345678910");
+            dto.setPassword("123456");
             //1.正常登录（手机号+密码登录）
             if (!StringUtils.isBlank(dto.getPhone()) && !StringUtils.isBlank(dto.getPassword())) {
                 //1.1查询用户

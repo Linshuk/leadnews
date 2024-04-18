@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="generator.ApUserFanDao">
+  <resultMap id="BaseResultMap" type="generator.ApUserFan">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="fans_id" jdbcType="INTEGER" property="fansId" />
+    <result column="fans_name" jdbcType="VARCHAR" property="fansName" />
+    <result column="level" jdbcType="BIT" property="level" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="is_display" jdbcType="BIT" property="isDisplay" />
+    <result column="is_shield_letter" jdbcType="BIT" property="isShieldLetter" />
+    <result column="is_shield_comment" jdbcType="BIT" property="isShieldComment" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, user_id, fans_id, fans_name, `level`, created_time, is_display, is_shield_letter, 
+    is_shield_comment
+  </sql>
+  <select id="selectByExample" parameterType="generator.ApUserFanExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ap_user_fan
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ap_user_fan
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ap_user_fan
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="generator.ApUserFanExample">
+    delete from ap_user_fan
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="generator.ApUserFan" useGeneratedKeys="true">
+    insert into ap_user_fan (user_id, fans_id, fans_name, 
+      `level`, created_time, is_display, 
+      is_shield_letter, is_shield_comment)
+    values (#{userId,jdbcType=INTEGER}, #{fansId,jdbcType=INTEGER}, #{fansName,jdbcType=VARCHAR}, 
+      #{level,jdbcType=BIT}, #{createdTime,jdbcType=TIMESTAMP}, #{isDisplay,jdbcType=BIT}, 
+      #{isShieldLetter,jdbcType=BIT}, #{isShieldComment,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="generator.ApUserFan" useGeneratedKeys="true">
+    insert into ap_user_fan
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="fansId != null">
+        fans_id,
+      </if>
+      <if test="fansName != null">
+        fans_name,
+      </if>
+      <if test="level != null">
+        `level`,
+      </if>
+      <if test="createdTime != null">
+        created_time,
+      </if>
+      <if test="isDisplay != null">
+        is_display,
+      </if>
+      <if test="isShieldLetter != null">
+        is_shield_letter,
+      </if>
+      <if test="isShieldComment != null">
+        is_shield_comment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="fansId != null">
+        #{fansId,jdbcType=INTEGER},
+      </if>
+      <if test="fansName != null">
+        #{fansName,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=BIT},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDisplay != null">
+        #{isDisplay,jdbcType=BIT},
+      </if>
+      <if test="isShieldLetter != null">
+        #{isShieldLetter,jdbcType=BIT},
+      </if>
+      <if test="isShieldComment != null">
+        #{isShieldComment,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="generator.ApUserFanExample" resultType="java.lang.Long">
+    select count(*) from ap_user_fan
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ap_user_fan
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fansId != null">
+        fans_id = #{record.fansId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fansName != null">
+        fans_name = #{record.fansName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level != null">
+        `level` = #{record.level,jdbcType=BIT},
+      </if>
+      <if test="record.createdTime != null">
+        created_time = #{record.createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isDisplay != null">
+        is_display = #{record.isDisplay,jdbcType=BIT},
+      </if>
+      <if test="record.isShieldLetter != null">
+        is_shield_letter = #{record.isShieldLetter,jdbcType=BIT},
+      </if>
+      <if test="record.isShieldComment != null">
+        is_shield_comment = #{record.isShieldComment,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ap_user_fan
+    set id = #{record.id,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      fans_id = #{record.fansId,jdbcType=INTEGER},
+      fans_name = #{record.fansName,jdbcType=VARCHAR},
+      `level` = #{record.level,jdbcType=BIT},
+      created_time = #{record.createdTime,jdbcType=TIMESTAMP},
+      is_display = #{record.isDisplay,jdbcType=BIT},
+      is_shield_letter = #{record.isShieldLetter,jdbcType=BIT},
+      is_shield_comment = #{record.isShieldComment,jdbcType=BIT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="generator.ApUserFan">
+    update ap_user_fan
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="fansId != null">
+        fans_id = #{fansId,jdbcType=INTEGER},
+      </if>
+      <if test="fansName != null">
+        fans_name = #{fansName,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        `level` = #{level,jdbcType=BIT},
+      </if>
+      <if test="createdTime != null">
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDisplay != null">
+        is_display = #{isDisplay,jdbcType=BIT},
+      </if>
+      <if test="isShieldLetter != null">
+        is_shield_letter = #{isShieldLetter,jdbcType=BIT},
+      </if>
+      <if test="isShieldComment != null">
+        is_shield_comment = #{isShieldComment,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="generator.ApUserFan">
+    update ap_user_fan
+    set user_id = #{userId,jdbcType=INTEGER},
+      fans_id = #{fansId,jdbcType=INTEGER},
+      fans_name = #{fansName,jdbcType=VARCHAR},
+      `level` = #{level,jdbcType=BIT},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      is_display = #{isDisplay,jdbcType=BIT},
+      is_shield_letter = #{isShieldLetter,jdbcType=BIT},
+      is_shield_comment = #{isShieldComment,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

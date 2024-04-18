@@ -1,5 +1,5 @@
 package jmu.lsk.wemedia.service.impl;
-import jmu.lsk.apis.article.IScheduleClient;
+import jmu.lsk.apis.schedule.IScheduleClient;
 import jmu.lsk.model.common.enums.TaskTypeEnum;
 import jmu.lsk.model.schedule.dtos.Task;
 import jmu.lsk.model.wemedia.pojos.WmNews;

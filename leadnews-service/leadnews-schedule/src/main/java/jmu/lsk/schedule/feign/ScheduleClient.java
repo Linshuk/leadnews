@@ -1,5 +1,5 @@
 package jmu.lsk.schedule.feign;
-import jmu.lsk.apis.article.IScheduleClient;
+import jmu.lsk.apis.schedule.IScheduleClient;
 import jmu.lsk.model.common.dtos.ResponseResult;
 import jmu.lsk.model.schedule.dtos.Task;
 import jmu.lsk.schedule.service.TaskService;

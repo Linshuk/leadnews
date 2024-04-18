@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import jmu.lsk.apis.article.IArticleClient;
-import jmu.lsk.apis.article.IScheduleClient;
+import jmu.lsk.apis.schedule.IScheduleClient;
 import jmu.lsk.common.constants.WemediaConstants;
 import jmu.lsk.common.constants.WmNewsMessageConstants;
 import jmu.lsk.common.exception.CustomException;

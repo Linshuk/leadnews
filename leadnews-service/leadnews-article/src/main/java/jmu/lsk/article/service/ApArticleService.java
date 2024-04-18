@@ -5,8 +5,12 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import jmu.lsk.model.article.dtos.ArticleDto;
 import jmu.lsk.model.article.dtos.ArticleHomeDto;
 import jmu.lsk.model.article.dtos.ArticleInfoDto;
+import jmu.lsk.model.article.mess.ArticleVisitStreamMess;
 import jmu.lsk.model.article.pojos.ApArticle;
 import jmu.lsk.model.common.dtos.ResponseResult;
+
+import java.util.Date;
+import java.util.List;
 
 public interface ApArticleService extends IService<ApArticle> {
  
@@ -19,5 +23,9 @@ public interface ApArticleService extends IService<ApArticle> {
     ResponseResult load(Short loadtype, ArticleHomeDto dto);
 
     ResponseResult saveArticle(ArticleDto dto);
-
+    /**
+     * 更新文章的分值  同时更新缓存中的热点文章数据
+     * @param mess
+     */
+    public void updateScore(ArticleVisitStreamMess mess);
 }
