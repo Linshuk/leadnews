@@ -24,10 +24,7 @@ public class ApUserLoginController {
 
     @PostMapping("/login_auth")
     @Operation(summary = "用户登录")
-    public ResponseResult login(String dto){
-        LoginDto dto1 = new LoginDto();
-        dto1.setPhone("12345678910");
-        dto1.setPassword("123456");
-        return apUserService.login(dto1);
+    public ResponseResult login(LoginDto dto){
+        return apUserService.login(dto);
     }
 }

@@ -47,24 +47,24 @@ public class ApUserRelationServiceImpl extends ServiceImpl<ApUserFollowMapper,Ap
             CustException.cust(AppHttpCodeEnum.NEED_LOGIN);
         }
         int operation = dto.getOperation().intValue();
-        if(operation!=0 && operation!=1){
-            CustException.cust(AppHttpCodeEnum.PARAM_INVALID,"关注类型错误  类型必须为: 0关注  1取关");
+        if (operation != 0 && operation != 1) {
+            CustException.cust(AppHttpCodeEnum.PARAM_INVALID, "关注类型错误  类型必须为: 0关注  1取关");
         }
         // 用于操作zset接口的 redis对象
 //        ZSetOperations<String, String> zsetOption = redisTemplate.opsForZSet();
 
         // 开启支持事务
-        if(operation == 0){
+        if (operation == 0) {
             // 2. operation = 0  关注     关注集合   粉丝集合 添加数据
-            if(loginUser.getId().equals(dto.getAuthorId())){
-                CustException.cust(AppHttpCodeEnum.DATA_NOT_ALLOW,"自己不能关注自己");
+            if (loginUser.getId().equals(dto.getAuthorId())) {
+                CustException.cust(AppHttpCodeEnum.DATA_NOT_ALLOW, "自己不能关注自己");
             }
 
             try {
                 // zscore  集合   元素      有返回值: 有这个元素    返回值null: 没有这个元素
                 Double score = cacheService.zScore(UserRelationConstants.FOLLOW_LIST + loginUser.getId(), String.valueOf(dto.getAuthorId()));
-                if (score!=null) {
-                    CustException.cust(AppHttpCodeEnum.DATA_NOT_ALLOW,"请勿重复关注");
+                if (score != null) {
+                    CustException.cust(AppHttpCodeEnum.DATA_NOT_ALLOW, "请勿重复关注");
                 }
 
                 // 将作者id 添加到我的关注集合中
@@ -75,60 +75,11 @@ public class ApUserRelationServiceImpl extends ServiceImpl<ApUserFollowMapper,Ap
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }else {
+        } else {
             // 3. operation = 1  取关     关注集合   粉丝集合 删除数据
-            cacheService.zRemove(UserRelationConstants.FOLLOW_LIST + loginUser.getId(),String.valueOf(dto.getAuthorId()));
-            cacheService.zRemove(UserRelationConstants.FANS_LIST + dto.getAuthorId(),String.valueOf(loginUser.getId()));
+            cacheService.zRemove(UserRelationConstants.FOLLOW_LIST + loginUser.getId(), String.valueOf(dto.getAuthorId()));
+            cacheService.zRemove(UserRelationConstants.FANS_LIST + dto.getAuthorId(), String.valueOf(loginUser.getId()));
         }
-        return ResponseResult.okResult(AppHttpCodeEnum.SUCCESS);
-    }
-
-    @Autowired
-    private ApUserFanMapper apUserFanMapper;
-
-    @Autowired
-    private ApUserFollowMapper apUserFollowMapper;
-
-    @Autowired
-    private ApUserMapper apUserMapper;
-
-
-
-    private ResponseResult saveRelation(UserRelationDto dto){
-        Integer id = AppThreadLocalUtil.getUser().getId();
-        System.out.println(id);
-        ApUser apUser = apUserMapper.selectById(id);
-
-        ApUserFan apUserFan= new ApUserFan();
-        apUserFan.setUserId(dto.getAuthorId());
-        apUserFan.setFansId(apUser.getId());
-        apUserFan.setFansName(apUser.getName());
-        apUserFan.setCreatedTime(new Date());
-        apUserFan.setLevel((short) 0);
-        apUserFan.setIsDisplay(true);
-        apUserFan.setIsShieldComment(false);
-        apUserFan.setIsShieldLetter(false);
-
-
-
-        ApUserFollow apUserFollow = new ApUserFollow();
-        apUserFollow.setUserId(apUser.getId());
-        apUserFollow.setFollowId(dto.getAuthorId());
-        apUserFollow.setCreatedTime(new Date());
-        apUserFollow.setLevel((short) 0);
-        apUserFollow.setIsNotice(true);
-
-        apUserFollowMapper.insert(apUserFollow);
-        apUserFanMapper.insert(apUserFan);
-
-        return ResponseResult.okResult(AppHttpCodeEnum.SUCCESS);
-    }
-
-    private ResponseResult deleteRelation(UserRelationDto dto){
-        ApUser apUser = AppThreadLocalUtil.getUser();
-        apUserFanMapper.delete(Wrappers.<ApUserFan>lambdaQuery().eq(ApUserFan::getFansId,apUser.getId()));
-        apUserFollowMapper.delete(Wrappers.<ApUserFollow>lambdaQuery().eq(ApUserFollow::getFollowId,dto.getAuthorId()));
-
         return ResponseResult.okResult(AppHttpCodeEnum.SUCCESS);
     }
 

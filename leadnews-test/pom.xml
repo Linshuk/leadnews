@@ -13,6 +13,7 @@
     <modules>
         <module>elasticsearch-init</module>
         <module>mongo-demo</module>
+        <module>xxljob-demo</module>
     </modules>
 
     <artifactId>leadnews-test</artifactId>

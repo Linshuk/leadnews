@@ -16,7 +16,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @EnableDiscoveryClient
 @MapperScan("jmu.lsk.wemedia.mapper")
-@EnableFeignClients("jmu.lsk.apis.article")
+@EnableFeignClients("jmu.lsk.apis")
 @EnableScheduling
 @EnableAsync
 public class WeMediaApplication {

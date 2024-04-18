@@ -1,4 +1,4 @@
-package jmu.lsk.apis.article;
+package jmu.lsk.apis.schedule;
 import jmu.lsk.model.common.dtos.ResponseResult;
 import jmu.lsk.model.schedule.dtos.Task;
 import org.springframework.cloud.openfeign.FeignClient;

@@ -8,6 +8,9 @@ import jmu.lsk.model.article.dtos.ArticleInfoDto;
 import jmu.lsk.model.article.pojos.ApArticle;
 import jmu.lsk.model.common.dtos.ResponseResult;
 
+import java.util.Date;
+import java.util.List;
+
 public interface ApArticleService extends IService<ApArticle> {
  
     /**
