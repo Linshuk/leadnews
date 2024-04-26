@@ -25,6 +25,7 @@ public class KafkaStreamConfig {
     private static final int MAX_MESSAGE_SIZE = 16* 1024 * 1024;
     private String hosts;
     private String group;
+
     @Bean(name = KafkaStreamsDefaultConfiguration.DEFAULT_STREAMS_CONFIG_BEAN_NAME)
     public KafkaStreamsConfiguration defaultKafkaStreamsConfig() {
         Map<String, Object> props = new HashMap<>();
@@ -36,4 +37,6 @@ public class KafkaStreamConfig {
         props.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass());
         return new KafkaStreamsConfiguration(props);
     }
+
+
 }

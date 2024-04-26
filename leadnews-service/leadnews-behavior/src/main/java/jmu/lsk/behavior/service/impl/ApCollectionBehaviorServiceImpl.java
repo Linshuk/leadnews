@@ -1,11 +1,14 @@
 package jmu.lsk.behavior.service.impl;
 import java.util.Date;
 
+import com.alibaba.fastjson.JSON;
 import jmu.lsk.behavior.service.ApCollectionBehaviorService;
+import jmu.lsk.common.constants.BehaviorConstants;
 import jmu.lsk.common.exception.CustException;
 import jmu.lsk.model.behavior.dtos.CollectionBehaviorDTO;
 import jmu.lsk.model.behavior.pojos.ApBehaviorEntry;
 import jmu.lsk.model.behavior.pojos.ApCollection;
+import jmu.lsk.model.behavior.vos.BehaviorVo;
 import jmu.lsk.model.common.dtos.ResponseResult;
 import jmu.lsk.model.common.enums.AppHttpCodeEnum;
 import jmu.lsk.model.user.pojos.ApUser;
@@ -14,12 +17,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 @Service
 public class ApCollectionBehaviorServiceImpl implements ApCollectionBehaviorService {
 
     @Autowired
     MongoTemplate mongoTemplate;
+
+    @Autowired
+    KafkaTemplate<String,String> kafkaTemplate;
 
     @Override
     public ResponseResult collectBehavior(CollectionBehaviorDTO dto) {

@@ -1,14 +1,13 @@
 package jmu.lsk.behavior.service.impl;
 import java.util.Date;
 
-import com.alibaba.fastjson.JSON;
-import io.swagger.v3.core.util.Json;
+import com.alibaba.fastjson2.JSON;
 import jmu.lsk.behavior.service.ApReadBehaviorService;
-import jmu.lsk.common.constants.ArticleConstants;
+import jmu.lsk.common.constants.BehaviorConstants;
 import jmu.lsk.common.constants.HotArticleConstants;
 import jmu.lsk.model.behavior.dtos.ReadBehaviorDTO;
-import jmu.lsk.model.behavior.pojos.ApBehaviorEntry;
 import jmu.lsk.model.behavior.pojos.ApReadBehavior;
+import jmu.lsk.model.behavior.vos.BehaviorVo;
 import jmu.lsk.model.common.dtos.ResponseResult;
 import jmu.lsk.model.common.enums.AppHttpCodeEnum;
 import jmu.lsk.model.mess.UpdateArticleMess;
@@ -62,12 +61,6 @@ public class ApReadBehaviorServiceImpl implements ApReadBehaviorService {
             readBehavior.setCount((short)(readBehavior.getCount() + 1));
             mongoTemplate.save(readBehavior);
         }
-//        NewBehaviorDTO newBehavior = new NewBehaviorDTO();
-//        newBehavior.setType(NewBehaviorDTO.BehaviorType.VIEWS);
-//        newBehavior.setArticleId(dto.getArticleId());
-//        newBehavior.setAdd(1);
-//        rabbitTemplate.convertAndSend(HotArticleConstants.HOT_ARTICLE_SCORE_BEHAVIOR_QUEUE,JSON.toJSONString(newBehavior));
-//        log.info("成功发送 文章阅读行为消息 , 消息内容: {}",newBehavior);
         return ResponseResult.okResult(AppHttpCodeEnum.SUCCESS);
     }
 }

@@ -4,11 +4,13 @@ import java.util.Date;
 
 import com.alibaba.fastjson2.JSON;
 import jmu.lsk.behavior.service.ApLikesBehaviorService;
+import jmu.lsk.common.constants.BehaviorConstants;
 import jmu.lsk.common.constants.HotArticleConstants;
 import jmu.lsk.common.exception.CustException;
 import jmu.lsk.model.behavior.dtos.LikesBehaviorDTO;
 import jmu.lsk.model.behavior.pojos.ApBehaviorEntry;
 import jmu.lsk.model.behavior.pojos.ApLikesBehavior;
+import jmu.lsk.model.behavior.vos.BehaviorVo;
 import jmu.lsk.model.common.dtos.ResponseResult;
 import jmu.lsk.model.common.enums.AppHttpCodeEnum;
 import jmu.lsk.model.mess.UpdateArticleMess;
@@ -71,12 +73,6 @@ public class ApLikesBehaviorServiceImpl implements ApLikesBehaviorService {
             updateArticleMess.setAdd(-1);
         }
         // 发送新行为消息
-//        NewBehaviorDTO newBehavior = new NewBehaviorDTO();
-//        newBehavior.setType(BehaviorType.LIKES);
-//        newBehavior.setArticleId(dto.getArticleId());
-//        newBehavior.setAdd(dto.getOperation().intValue()==0?1:-1);
-//        rabbitTemplate.convertAndSend(HotArticleConstants.HOT_ARTICLE_SCORE_BEHAVIOR_QUEUE,JSON.toJSONString(newBehavior));
-//        log.info("成功发送 文章点赞行为消息 , 消息内容: {}",newBehavior);
         kafkaTemplate.send(HotArticleConstants.HOT_ARTICLE_SCORE_TOPIC, JSON.toJSONString(updateArticleMess));
         return ResponseResult.okResult(AppHttpCodeEnum.SUCCESS);
     }

@@ -19,7 +19,6 @@
         <module>leadnews-model</module>
         <module>leadnews-service</module>
         <module>leadnews-utils</module>
-        <module>leadnews-test</module>
         <module>leadnews-service</module>
         <module>leadnews-service</module>
         <module>leadnews-service/leadnews-user</module>
@@ -29,7 +28,6 @@
         <module>leadnews-basic</module>
         <module>leadnews-service/leadnews-wemedia</module>
         <module>leadnews-service/leadnews-schedule</module>
-        <module>leadnews-test/elasticsearch-init</module>
         <module>leadnews-service/leadnews-behavior</module>
     </modules>
     <properties>
